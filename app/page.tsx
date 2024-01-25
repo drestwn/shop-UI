@@ -1,4 +1,4 @@
-import Image from "next/image";
+import CardItem from "@/components/CardItem";
 import styles from "./page.module.css";
 import TopBar from "@/components/TopBar";
 
@@ -8,7 +8,7 @@ export default function Home() {
       <div className={styles.container}>
         <div className={styles.gridPage}>
           <TopBar />
-          <div id="item_246" className={styles.item}>
+          {/* <div className={styles.item}>
             <div className={styles.itemInner}>
               <div className={styles.itemCard}>
                 <a
@@ -50,7 +50,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          <CardItem title="Paist" />
         </div>
       </div>
     </>
