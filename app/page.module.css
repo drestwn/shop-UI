@@ -1,0 +1,24 @@
+.body{
+    font-family:"Graphik", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-feature-settings:'ss03' on;
+    font-size:14px;
+    letter-spacing:-0.009em;
+    line-height:120%;
+    color:black;
+    background:#FFFFFF;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    text-rendering:geometricPrecision
+}
+.container{
+    display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 80px);
+    padding: 24px 14px 56px 14px;
+}
+.gridPage{
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    margin: 0 0 55px 0;
+    grid-auto-flow: row dense;
+}
