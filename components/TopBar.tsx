@@ -53,7 +53,7 @@ export default function TopBar() {
       </div>
       <div className={styles.stackRowFooter}>
         <i className={styles.icon}>*</i>
-        
+
         <p className={styles.paragraphFooter}>
           <em>Fewer, better things.</em>
           <br />
@@ -62,13 +62,13 @@ export default function TopBar() {
           physical products. Updated weekly.
         </p>
         <div className={styles.footerTop}>
-          <span className="text-tertiary">© 2024 Goods.wtf → Beta 0.1.5</span>
-          <span className="text-tertiary">
+          <span className="text-tertiary">@drestwn</span>
+          {/* <span className="text-tertiary">
             View website{" "}
             <a href="" target="_blank">
               stats
             </a>
-          </span>
+          </span> */}
         </div>
       </div>
     </div>

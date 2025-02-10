@@ -172,6 +172,7 @@ a {
 }
 .text-secondary {
   color: rgba(0, 0, 0, 0.75);
+  font-size: small;
 }
 @media all and (min-width: 2460px) {
   .grid {

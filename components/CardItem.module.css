@@ -106,3 +106,21 @@ a.text-tertiary {
   display: flex;
   flex-direction: row;
 }
+
+.staffPick {
+  display: flex;
+  flex-direction: row;
+  padding: 15px 0px 0px 12px;
+  align-items: center;
+}
+.staffPickIcon {
+  display: flex;
+  height: 15px;
+  width: 15px;
+  padding: 0px 5px 0px 0px;
+  color: purple;
+}
+.staffPick a {
+  font-size: 10px;
+  color: purple;
+}
