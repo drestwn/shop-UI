@@ -1,12 +1,30 @@
 "use client";
-import { use, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CardItem.module.css";
+interface CardItemProps {
+  title: string;
+  brand: string;
+  category: string;
+  price?: number;
+  isStaffPick: boolean;
+  mainImg?: string;
+}
 
-export default function CardItem(props: any) {
-  console.log(props);
-  const [isStaffPick, setIsStaffPick] = useState(true);
+export default function CardItem(props: CardItemProps) {
+  // console.log(props);
+  const [isStaffPick, setIsStaffPick] = useState(false);
+  useEffect(() => {
+    setIsStaffPick(props.isStaffPick);
+  }, []);
+
   return (
-    <div className={styles.item}>
+    <div
+      className={styles.item}
+      onClick={() => {
+        console.log("CardItem clicked");
+        props.onClick();
+      }}
+    >
       <div className={styles.itemInner}>
         <div className={styles.itemCard}>
           {isStaffPick && (
@@ -33,38 +51,53 @@ export default function CardItem(props: any) {
           <a
             className={styles.itemImgWrap}
             pirsch-link="card-int-link"
-            href="/items/paist-sensitive-premium-eco-friendly-toohpaste-zero-plastic"
+            // href="/items/paist-sensitive-premium-eco-friendly-toohpaste-zero-plastic"
           >
             <div className={styles.imgSpacer}>
               <img
                 className="img-main"
-                src="https://bureau.ams3.digitaloceanspaces.com/goods/prod/uploads/store/30fc4c772f0df37bf71410fd026355b0.png"
+                // src="https://bureau.ams3.digitaloceanspaces.com/goods/prod/uploads/store/30fc4c772f0df37bf71410fd026355b0.png"
+                src={props.mainImg}
                 alt={""}
               />
             </div>
           </a>{" "}
           <div className={styles.itemInfo}>
             <div className={styles.itemInfoTitle}>
-              <a className="text-tertiary" href="/brands/paist">
-                {props.title}
+              <a
+                className="text-small text-tertiary"
+                style={{ textDecoration: "none" }}
+                // href={`/brand/${props.brand}`}
+              >
+                {props.brand}
               </a>
-              <i className="text-tertiary">·</i>
-              <a className="text-tertiary" href="/categories/personal">
-                Personal
+              <i
+                className="text-small text-tertiary"
+                style={{ textDecoration: "none" }}
+              >
+                ·
+              </i>
+              <a
+                className="text-small text-tertiary"
+                // href="/categories/personal"
+                style={{ textDecoration: "none" }}
+              >
+                {props.category}
               </a>
             </div>
             <div className={styles.stackHorizontal}>
-              <div className="text-ellipsis">
+              <div className="text-primary">
                 <a
-                  href="https://paist.co/products/sensitive?variant=47334079168827?ref=goodswtf"
+                  // href="https://paist.co/products/sensitive?variant=47334079168827?ref=goodswtf"
                   target="_blank"
                   className="text-secondary"
                   pirsch-link="card-ext-link"
+                  style={{ textDecoration: "none" }}
                 >
-                  Sensitive
+                  {props.title}
                 </a>
               </div>
-              <div className="text-secondary">$14</div>
+              <div className="text-secondary">${props.price}</div>
             </div>
           </div>
         </div>

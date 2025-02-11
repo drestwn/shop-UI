@@ -7,25 +7,28 @@
   gap: 16px;
 }
 .itemCard {
-  background: #f4f4f6;
+  background-color: #eeeef0;
   border-radius: 10px;
   position: relative;
 }
-/* .gridPage .item .item-inner .item-card .item-actions {
-    display: none;
-    gap: 8px;
-    position: absolute;
-    top: 16px;
-  } */
-/* .gridPage .item .item-inner .item-card .item-actions.left {
-    left: 16px;
-  }
-  .gridPage .item .item-inner .item-card .item-actions.right {
-    right: 16px;
-  } */
-/* .gridPage .item .item-inner .item-card .item-actions.pinned {
-    display: flex;
-  } */
+.itemCard:hover {
+  background-color: #eeeef0b9;
+}
+.gridPage .item .item-inner .item-card .item-actions {
+  /* display: none; */
+  gap: 8px;
+  position: absolute;
+  top: 16px;
+}
+.gridPage .item .item-inner .item-card .item-actions.left {
+  left: 16px;
+}
+.gridPage .item .item-inner .item-card .item-actions.right {
+  right: 16px;
+}
+.gridPage .item .item-inner .item-card .item-actions.pinned {
+  display: flex;
+}
 .itemImgWrap {
   aspect-ratio: 0.88;
   display: flex;
@@ -72,31 +75,32 @@ a.text-tertiary {
     overflow: hidden;
     text-overflow: ellipsis;
   } */
-.itemCard {
-  background: #eeeef0;
-}
-/* .gridPage .item .item-inner:hover .item-card .item-actions {
-    display: flex;
-  } */
+
 .imgSpacer {
   width: 60%;
   height: auto;
-  transition: margin 220ms ease-in-out;
+  transition: transform 220ms ease-in-out; /* Changed from margin to transform for the lift effect */
   position: absolute;
   z-index: 2;
 }
+
+/* Lift effect on hover */
 .imgSpacer:hover {
-  z-index: 1;
-  display: none;
+  transform: translateY(-10px); /* Adjust this value for more or less lift */
+  /* Removed z-index: 1; and display: none; */
 }
+
 .imgSpacer > img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+
 .imgSpacer > img.img-main {
   z-index: 1;
 }
+
+/* If you want to keep the hover image logic */
 .imgSpacer > img.img-hover {
   display: none;
   z-index: 0;
@@ -105,6 +109,7 @@ a.text-tertiary {
 .stackHorizontal {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .staffPick {
@@ -123,4 +128,8 @@ a.text-tertiary {
 .staffPick a {
   font-size: 10px;
   color: purple;
+}
+
+.no-underline {
+  text-decoration: none;
 }
