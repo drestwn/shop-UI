@@ -64,3 +64,28 @@
   -webkit-mask-size: cover;
   /* background: #151515; */
 }
+.iconSmallReturnOutlineMaskUiLight {
+  color: #a5a5a5;
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+}
+.textTertiary {
+  display: flex;
+  flex-direction: row;
+}
+
+.stack.col {
+  max-width: 100%;
+  flex-direction: column !important;
+}
+
+.stack {
+  display: flex;
+}
+.dont-collapse {
+  flex: 1;
+}
+.Gap-16 {
+  gap: 16px;
+}

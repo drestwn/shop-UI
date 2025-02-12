@@ -4,6 +4,8 @@ import styles from "./page.module.css";
 import TopBar from "@/components/TopBar";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
+
 export default function Home() {
   const router = useRouter();
   const [dataProduct, setDataProduct] = useState([]);
@@ -46,6 +48,10 @@ export default function Home() {
           ))}
         </div>
       </div>
+      <TawkMessengerReact
+        propertyId={process.env.NEXT_PUBLIC_TAWK_PROPERTY_ID}
+        widgetId={process.env.NEXT_PUBLIC_TAWK_WIDGET_ID}
+      />
     </>
   );
 }

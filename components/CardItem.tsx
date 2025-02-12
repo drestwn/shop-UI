@@ -1,16 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./CardItem.module.css";
-interface CardItemProps {
-  title: string;
-  brand: string;
-  category: string;
-  price?: number;
-  isStaffPick: boolean;
-  mainImg?: string;
-}
 
-export default function CardItem(props: CardItemProps) {
+export default function CardItem(props: any) {
   // console.log(props);
   const [isStaffPick, setIsStaffPick] = useState(false);
   useEffect(() => {
