@@ -7,13 +7,17 @@ import { useRouter } from "next/navigation";
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 
 export default function Home() {
+  const url: any = process.env.NEXT_PUBLIC_HOST_URL;
+  console.log(url, "url");
+
   const router = useRouter();
   const [dataProduct, setDataProduct] = useState([]);
   useEffect(() => {
     // setLoading(true);
-    fetch("https://api.escuelajs.co/api/v1/products") // Adjust the endpoint according to your setup
+    fetch(url) // Adjust the endpoint according to your setup
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         const limitedData = data.slice(0, 15);
         setDataProduct(limitedData);
       })

@@ -19,6 +19,8 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DetailTopBar from "@/components/DetailTopBar";
 export default function product() {
+  const url: any = process.env.NEXT_PUBLIC_HOST_URL;
+
   const params = useParams();
   // console.log(params.product);
   // const product = router.state?.product;
@@ -32,10 +34,8 @@ export default function product() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        // setIsLoading(true);
-        const response = await fetch(
-          `https://api.escuelajs.co/api/v1/products/?title=${params.product}`
-        );
+        // setIsLoading(true);F
+        const response = await fetch(`${url}/?title=${params.product}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
