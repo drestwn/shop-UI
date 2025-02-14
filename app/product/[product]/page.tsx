@@ -11,6 +11,30 @@ interface Product {
   price: number;
   images: string[]; // Assuming images is an array of strings
 }
+
+// Function to fetch products, using environment variable for URL
+async function fetchProductDetail(params: {
+  product: string | string[];
+}): Promise<Product> {
+  const url = process.env.NEXT_PUBLIC_HOST_URL;
+  if (!url) {
+    throw new Error("API URL is not defined in environment variables");
+  }
+  try {
+    const response = await fetch(`${url}/?${params}`);
+
+    const data = await response.json();
+
+    if (data.length === 0) {
+      throw new Error("Product not found");
+    }
+
+    return data[0] as Product;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // Re-throw the error for handling in the component
+  }
+}
 import CardItem from "@/components/CardItem";
 import styles from "../../page.module.css";
 import { useEffect, useState } from "react";
@@ -19,45 +43,26 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DetailTopBar from "@/components/DetailTopBar";
 export default function product() {
-  const url: any = process.env.NEXT_PUBLIC_HOST_URL;
-
+  // const url: any = process.env.NEXT_PUBLIC_HOST_URL;
   const params = useParams();
-  // console.log(params.product);
-  // const product = router.state?.product;
+  console.log(params.product);
   const [product, setProduct] = useState<Product | {}>({}); // Use the Product interface or an empty object
   const [image, setImage] = useState<string>("");
   const [category, setCategory] = useState<Category | {}>({});
 
-  console.log(product, "product1");
   const [isStaffPick, setIsStaffPick] = useState(true);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        // setIsLoading(true);F
-        const response = await fetch(`${url}/?title=${params.product}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        console.log(data[0]);
-        setProduct(data[0]);
-        setImage(data[0].images[0]);
-        setCategory(data[0].category);
-        // console.log(data[0].category.name);
-
-        // const dataDetail = data.map((data: any) => {
-        //   return data;
-        // });
-        // console.log(dataDetail, "currentProduct");
-      } catch (err) {
-        // setError(err.message);
-      } finally {
-        // setIsLoading(false);
-      }
-    };
-
-    fetchProduct();
+    fetchProductDetail({ product: params.product })
+      .then((fetchedProduct) => {
+        setProduct(fetchedProduct);
+        setImage(JSON.parse(fetchedProduct.images[0] || ""));
+        setCategory(fetchedProduct.category || "");
+      })
+      .catch((error) => {
+        console.error("Failed to fetch product detail:", error);
+        // Handle error state here if needed
+      });
   }, [params.product]);
   return (
     <div className={styles.container}>

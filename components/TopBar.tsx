@@ -1,5 +1,17 @@
 "use client";
 import styles from "../components/TopBar.module.css";
+import { auth, googleProvider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+const handleSignInWithGoogle = async () => {
+  try {
+    await signInWithPopup(auth, googleProvider);
+    // After successful sign-in, you might want to redirect or update UI.
+    // For now, just log the user to console for verification
+    console.log("User signed in:", auth.currentUser);
+  } catch (error) {
+    console.error("Error signing in:", error);
+  }
+};
 export default function TopBar() {
   return (
     <div className={styles.hero}>
@@ -69,6 +81,27 @@ export default function TopBar() {
               stats
             </a>
           </span> */}
+          <div
+            style={
+              {
+                // display: "flex",
+                // justifyContent: "center",
+                // alignItems: "center",
+                // height: "100vh",
+              }
+            }
+          >
+            <button
+              onClick={handleSignInWithGoogle}
+              style={{
+                padding: "10px 20px",
+                fontSize: "16px",
+                cursor: "pointer",
+              }}
+            >
+              Sign in with Google
+            </button>
+          </div>
         </div>
       </div>
     </div>
