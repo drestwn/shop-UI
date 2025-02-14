@@ -1,7 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
 import styles from "../components/TopBar.module.css";
 import { auth, googleProvider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
+import { useRouter } from "next/navigation";
 const handleSignInWithGoogle = async () => {
   try {
     await signInWithPopup(auth, googleProvider);
@@ -12,54 +14,69 @@ const handleSignInWithGoogle = async () => {
     console.error("Error signing in:", error);
   }
 };
+
+interface Product {
+  id: number;
+  name: string;
+  // Add other properties as needed
+}
+interface Category {
+  id: number;
+  name: string;
+  products: Product[];
+}
+const url = process.env.NEXT_PUBLIC_HOST_URL;
+
+async function fetchCategory(): Promise<Category[]> {
+  try {
+    const response = await fetch(url + "/categories");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:category", error);
+    throw error; // Re-throw the error for handling in the component
+  }
+}
+
 export default function TopBar() {
+  const router = useRouter();
+  const [dataCategory, setDataCategory] = useState<Category[]>([]);
+  const handleItemCat = (item: any) => {
+    console.log("clicked item", item);
+    router.push(`category/${item}`);
+  };
+  useEffect(() => {
+    fetchCategory()
+      .then((limitedData) => {
+        console.log(limitedData, "category data");
+        setDataCategory(limitedData);
+      })
+      .catch((error) => {
+        console.error("Error in useEffect:", error);
+        // Handle error state here if needed
+      });
+  }, []);
   return (
     <div className={styles.hero}>
       <div className={styles.stackRow}>
         <div className={styles.stackRowTitle}>
           <span className={styles.stackRowTitleBar}>Categories</span>
           <ul className={styles.list}>
-            <li>
-              <a className="inline-flex">Tech</a>
-            </li>
-            <li>
-              <a>Life Style</a>
-            </li>
-            <li>
-              <a>Home</a>
-            </li>
-            <li>
-              <a>Workspace</a>
-            </li>
-            <li>
-              <a>Carry</a>
-            </li>
-            <li>
-              <a>Personal</a>
-            </li>
+            {dataCategory.map((data: any) => (
+              <li key={data.id} onClick={() => handleItemCat(data.id)}>
+                <a key={data.id}>{data.name}</a>
+              </li>
+            ))}
           </ul>
         </div>
         <div className={styles.stackRowTitle}>
-          <span className={styles.stackRowTitleBar}>Top Brands</span>
+          <span className={styles.stackRowTitleBar}>Categories</span>
           <ul className={styles.list}>
-            <li>
-              <a>Apple</a>
-            </li>
-            <li>
-              <a>Hardgraft</a>
-            </li>
-            <li>
-              <a>Teenage Engineering</a>
-            </li>
-            <li>
-              <a>Grovemade</a>
-            </li>
-            <li>
-              <a>Carl Friedrik</a>
-            </li>
-            <li>
-              <a>Logitech</a>
-            </li>
+            {dataCategory.map((data: any) => (
+              <li key={data.id} onClick={() => handleItemCat(data.id)}>
+                <a key={data.id}>{data.name}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
