@@ -25,7 +25,6 @@ async function FetchProductCategory(params: {
   try {
     const response = await fetch(`${url}/categories/${params.category}`);
     const data = await response.json();
-    console.log(data);
     if (data.length === 0) {
       throw new Error("Product not found");
     }
@@ -44,7 +43,6 @@ export default function Category() {
   useEffect(() => {
     FetchProductCategory({ category: params.category })
       .then((data) => {
-        console.log(data, "data");
         setCategoryName(data.name);
         setDataProduct(data.products);
       })

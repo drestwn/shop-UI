@@ -33,8 +33,8 @@ export default function Home() {
   useEffect(() => {
     FetchProducts()
       .then((limitedData) => {
-        console.log(limitedData);
         setDataProduct(limitedData);
+        console.log(limitedData);
       })
       .catch((error) => {
         console.error("Error in useEffect:", error);
@@ -43,7 +43,6 @@ export default function Home() {
   }, []);
 
   const handleItemClick = (item: any) => {
-    console.log("clicked item", item);
     router.push(`product/${item}`);
   };
   return (
@@ -59,7 +58,7 @@ export default function Home() {
               brand={data.brands}
               category={data.category.name}
               price={data.price}
-              isStaffPick={true}
+              isStaffPick={data.isStaffPick}
               mainImg={data.images}
               onClick={() => handleItemClick(data.id)}
             />

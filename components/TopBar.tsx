@@ -33,7 +33,6 @@ async function FetchCategory(): Promise<Category[]> {
   try {
     const response = await fetch(url + "/categories");
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Error fetching data:category", error);
@@ -46,15 +45,11 @@ export default function TopBar() {
   const [dataCategory, setDataCategory] = useState<Category[]>([]);
   const [signIn, setSignIn] = useState(false);
   const handleItemCat = (item: any) => {
-    console.log("clicked item", item);
     router.push(`category/${item}`);
   };
   const handleSignInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      // After successful sign-in, you might want to redirect or update UI.
-      // For now, just log the user to console for verification
-      console.log("User signed in:", auth.currentUser);
 
       if (auth.currentUser) {
         const data = {
@@ -63,7 +58,6 @@ export default function TopBar() {
           provider: "google",
           name: auth.currentUser.displayName, // Explicitly setting provider to 'google'
         };
-        console.log(data);
         const response = await fetch(url + "/user", {
           method: "POST",
           headers: {
@@ -81,72 +75,6 @@ export default function TopBar() {
       console.error("Error signing in:", error);
     }
   };
-  // const handleSignInWithGitHub = async () => {
-  //   try {
-  //     await signInWithPopup(auth, githubProvider);
-  //     console.log("User signed in with GitHub", auth.currentUser);
-  //     setSignIn(true);
-  //     // Additional logic for successful sign-in
-  //   } catch (error: any) {
-  //     console.error("Error signing in with GitHub:", error);
-  //     if (error.code === "auth/account-exists-with-different-credential") {
-  //       const email = error.customData.email;
-  //       // Use the correct method name from the auth instance
-  //       auth
-  //         .fetchProvidersForEmail(email)
-  //         .then((providers) => {
-  //           if (providers.length > 0) {
-  //             const provider = new auth[providers[0]]();
-  //             signInWithPopup(auth, provider)
-  //               .then((userCredential) => {
-  //                 // Note: credentialFromError might not be directly available for GitHub,
-  //                 // so we use credentialFromResult instead
-  //                 const githubCredential =
-  //                   GithubAuthProvider.credentialFromResult(error);
-  //                 if (githubCredential) {
-  //                   userCredential.user
-  //                     .linkWithCredential(githubCredential)
-  //                     .then(() => {
-  //                       console.log(
-  //                         "GitHub account linked to existing account"
-  //                       );
-  //                       setSignIn(true); // Set signIn state to true if linking is successful
-  //                     })
-  //                     .catch((linkError) => {
-  //                       console.error(
-  //                         "Error linking GitHub account:",
-  //                         linkError
-  //                       );
-  //                       setSignIn(false); // Set signIn to false if linking fails
-  //                     });
-  //                 } else {
-  //                   console.error(
-  //                     "Failed to create GitHub credential from error"
-  //                   );
-  //                   setSignIn(false);
-  //                 }
-  //               })
-  //               .catch((signInError) => {
-  //                 console.error(
-  //                   "Error signing in with existing provider:",
-  //                   signInError
-  //                 );
-  //                 setSignIn(false);
-  //               });
-  //           } else {
-  //             console.error("No existing providers found for this email");
-  //             setSignIn(false);
-  //           }
-  //         })
-  //         .catch((fetchError) => {
-  //           console.error("Error fetching sign-in methods:", fetchError);
-  //           setSignIn(false);
-  //         });
-  //     } else {
-  //       setSignIn(false);
-  //     }
-  //   }
-  // };
 
   const handleSignOut = async () => {
     try {
@@ -158,13 +86,10 @@ export default function TopBar() {
       console.error("Error signing out:", error);
     }
   };
-  useEffect(() => {
-    console.log(signIn); // This will log the updated state
-  }, [signIn]);
+  useEffect(() => {}, [signIn]);
   useEffect(() => {
     FetchCategory()
       .then((limitedData) => {
-        console.log(limitedData, "category data");
         setDataCategory(limitedData);
       })
       .catch((error) => {

@@ -10,7 +10,8 @@ interface Product {
   category: Category;
   price: number;
   brands: string;
-  images: string[]; // Assuming images is an array of strings
+  images: string[];
+  isStaffPick: boolean; // Assuming images is an array of strings
 }
 interface Response {
   id: 3;
@@ -40,7 +41,6 @@ async function FetchProductDetail(params: {
     const response = await fetch(`${url}/product/${params.product}`);
     const data = await response.json();
 
-    console.log(data);
     if (data.length === 0) {
       throw new Error("Product not found");
     }
@@ -52,26 +52,21 @@ async function FetchProductDetail(params: {
   }
 }
 export default function Product() {
-  // const url: any = process.env.NEXT_PUBLIC_HOST_URL;
   const params = useParams();
-  console.log(params.product);
   const [product, setProduct] = useState<Product | {}>({}); // Use the Product interface or an empty object
   const [image, setImage] = useState<string>("");
   const [category, setCategory] = useState<Category | {}>({});
-  console.log(category);
   const [isStaffPick, setIsStaffPick] = useState(true);
 
   useEffect(() => {
     FetchProductDetail({ product: params.product })
       .then((fetchedProduct) => {
         setProduct(fetchedProduct);
-        console.log(fetchedProduct);
-        // setImage(JSON.parse(fetchedProduct.image || ""));
         setCategory(fetchedProduct.category);
+        console.log(fetchedProduct, "fetched");
       })
       .catch((error) => {
         console.error("Failed to fetch product detail:", error);
-        // Handle error state here if needed
       });
   }, [params.product]);
   return (
@@ -83,7 +78,7 @@ export default function Product() {
             title={(product as Product).name}
             brand={(product as Product).brands}
             category={(category as Category).name}
-            isStaffPick={true}
+            isStaffPick={(product as Product).isStaffPick}
             mainImg={(product as Product).images}
             price={(product as Product).price}
           />

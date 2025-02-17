@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import styles from "./CardItem.module.css";
 
 export default function CardItem(props: any) {
-  // console.log(props);
   const [isStaffPick, setIsStaffPick] = useState(false);
   useEffect(() => {
     setIsStaffPick(props.isStaffPick);
@@ -13,7 +12,6 @@ export default function CardItem(props: any) {
     <div
       className={styles.item}
       onClick={() => {
-        console.log("CardItem clicked");
         props.onClick();
       }}
     >
@@ -40,18 +38,14 @@ export default function CardItem(props: any) {
               <a>Staff Pick</a>
             </div>
           )}
-          <a
-            className={styles.itemImgWrap}
-            pirsch-link="card-int-link"
-            // href="/items/paist-sensitive-premium-eco-friendly-toohpaste-zero-plastic"
-          >
+          {isStaffPick === false && (
+            <div className={styles.staffPick}>
+              <div className={styles.staffPickIcon}></div>
+            </div>
+          )}
+          <a className={styles.itemImgWrap} pirsch-link="card-int-link">
             <div className={styles.imgSpacer}>
-              <img
-                className="img-main"
-                // src="https://bureau.ams3.digitaloceanspaces.com/goods/prod/uploads/store/30fc4c772f0df37bf71410fd026355b0.png"
-                src={props.mainImg}
-                alt={""}
-              />
+              <img className="img-main" src={props.mainImg} alt={""} />
             </div>
           </a>{" "}
           <div className={styles.itemInfo}>
@@ -59,7 +53,6 @@ export default function CardItem(props: any) {
               <a
                 className="text-small text-tertiary"
                 style={{ textDecoration: "none" }}
-                // href={`/brand/${props.brand}`}
               >
                 {props.brand}
               </a>
@@ -71,7 +64,6 @@ export default function CardItem(props: any) {
               </i>
               <a
                 className="text-small text-tertiary"
-                // href="/categories/personal"
                 style={{ textDecoration: "none" }}
               >
                 {props.category}
@@ -80,7 +72,6 @@ export default function CardItem(props: any) {
             <div className={styles.stackHorizontal}>
               <div className="text-primary">
                 <a
-                  // href="https://paist.co/products/sensitive?variant=47334079168827?ref=goodswtf"
                   target="_blank"
                   className="text-secondary"
                   pirsch-link="card-ext-link"
