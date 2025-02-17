@@ -63,7 +63,6 @@ export default function Product() {
       .then((fetchedProduct) => {
         setProduct(fetchedProduct);
         setCategory(fetchedProduct.category);
-        console.log(fetchedProduct, "fetched");
       })
       .catch((error) => {
         console.error("Failed to fetch product detail:", error);
