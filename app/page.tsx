@@ -13,7 +13,7 @@ interface Product {
 
 // Function to fetch products, using environment variable for URL
 const url = process.env.NEXT_PUBLIC_HOST_URL;
-async function fetchProducts(): Promise<Product[]> {
+async function FetchProducts(): Promise<Product[]> {
   if (!url) {
     throw new Error("API URL is not defined in environment variables");
   }
@@ -31,7 +31,7 @@ export default function Home() {
   const router = useRouter();
   const [dataProduct, setDataProduct] = useState<Product[]>([]);
   useEffect(() => {
-    fetchProducts()
+    FetchProducts()
       .then((limitedData) => {
         console.log(limitedData);
         setDataProduct(limitedData);

@@ -19,7 +19,7 @@ interface Product {
 }
 const url = process.env.NEXT_PUBLIC_HOST_URL;
 
-async function fetchProductCategory(params: {
+async function FetchProductCategory(params: {
   category: string | string[];
 }): Promise<Product> {
   try {
@@ -36,13 +36,13 @@ async function fetchProductCategory(params: {
     throw error;
   }
 }
-export default function category() {
+export default function Category() {
   const [isStaffPick, setIsStaffPick] = useState(true);
   const [dataProduct, setDataProduct] = useState<Product[]>([]);
   const [categoryName, setCategoryName] = useState(String);
   const params = useParams();
   useEffect(() => {
-    fetchProductCategory({ category: params.category })
+    FetchProductCategory({ category: params.category })
       .then((data) => {
         console.log(data, "data");
         setCategoryName(data.name);

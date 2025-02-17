@@ -29,7 +29,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import DetailTopBar from "@/components/DetailTopBar";
 // Function to fetch products, using environment variable for URL
-async function fetchProductDetail(params: {
+async function FetchProductDetail(params: {
   product: string | string[];
 }): Promise<Product> {
   const url = process.env.NEXT_PUBLIC_HOST_URL;
@@ -51,7 +51,7 @@ async function fetchProductDetail(params: {
     throw error; // Re-throw the error for handling in the component
   }
 }
-export default function product() {
+export default function Product() {
   // const url: any = process.env.NEXT_PUBLIC_HOST_URL;
   const params = useParams();
   console.log(params.product);
@@ -62,7 +62,7 @@ export default function product() {
   const [isStaffPick, setIsStaffPick] = useState(true);
 
   useEffect(() => {
-    fetchProductDetail({ product: params.product })
+    FetchProductDetail({ product: params.product })
       .then((fetchedProduct) => {
         setProduct(fetchedProduct);
         console.log(fetchedProduct);
