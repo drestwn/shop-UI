@@ -1,0 +1,91 @@
+.hero {
+  padding: 24px 8px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.stackRow {
+  flex-direction: row !important;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.stackRowTitle {
+  max-width: 100%;
+  flex-direction: column !important;
+  display: flex;
+  gap: 16px !important;
+}
+.stackRowTitleBar {
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+  text-rendering: geometricPrecision;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style-position: outside;
+  list-style-image: none;
+  list-style-type: none;
+  letter-spacing: -0.009em;
+  list-style: none;
+  margin: 0;
+
+  padding: 0;
+}
+.list :hover {
+  text-decoration: underline;
+}
+.stackRowFooter {
+  display: flex;
+  max-width: 100%;
+  flex-direction: column !important;
+  gap: 16px !important;
+}
+.footerTop {
+  display: flex;
+  max-width: 100%;
+  flex-direction: column !important;
+  gap: 4px !important;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 12px;
+}
+.paragraphFooter {
+  font-size: 14px;
+  line-height: 156%;
+}
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  /* background: #151515; */
+}
+.iconSmallReturnOutlineMaskUiLight {
+  color: #a5a5a5;
+  width: 16px;
+  height: 16px;
+  margin-right: 2px;
+}
+.textTertiary {
+  display: flex;
+  flex-direction: row;
+}
+
+.stack.col {
+  max-width: 100%;
+  flex-direction: column !important;
+}
+
+.stack {
+  display: flex;
+}
+.dont-collapse {
+  flex: 1;
+}
+.Gap-16 {
+  gap: 16px;
+}
