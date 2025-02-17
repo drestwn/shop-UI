@@ -34,7 +34,6 @@ export default function Home() {
     FetchProducts()
       .then((limitedData) => {
         setDataProduct(limitedData);
-        console.log(limitedData);
       })
       .catch((error) => {
         console.error("Error in useEffect:", error);
